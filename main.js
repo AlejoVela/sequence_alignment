@@ -32,6 +32,7 @@ const GlobalAlignment = (sequenceOne, sequenceTwo, aligment) => {
   }
   let resultText = `${aligment}\nCantidad de coincidencias: ${points}`; 
   sameSize == true ? resultText += `\nPorcentaje de Similitud ${(points*100)/sequenceOne.length}%` : resultText += "";
+  resultText += `\nLogintud cadena 1: ${sequenceOne.length}\nLogintud cadena 2: ${sequenceTwo.length}`
   $resultChainOne.innerHTML = chainOneHtml;
   $resultChainTwo.innerHTML = chainTwoHtml;
   $resultCoincidence.innerHTML = chainCoincidence;
