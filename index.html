@@ -20,8 +20,23 @@
           type="text"
           class="text-uppercase form-control"
           autocapitalize="characters" 
+          placeholder="Type Chain #1"
           pattern="/^[GCTA]+$/g"
           id="chainOne"
+          >
+          <input 
+          type="number"
+          min="0"
+          class="form-control numericInput"
+          autocapitalize="characters"
+          id="chainOneLimit1"
+          >
+          <input 
+          type="number"
+          min="0"
+          class="form-control numericInput"
+          autocapitalize="characters"
+          id="chainOneLimit2"
           >
           <span class="input-group-text">
             Chain Two
@@ -29,9 +44,24 @@
           <input 
           type="text"
           class="text-uppercase form-control"
-          autocapitalize="characters" 
+          autocapitalize="characters"
+          placeholder="Type Chain #2" 
           pattern="/^[GCTA]+$/g"
           id="chainTwo"
+          >
+          <input 
+          type="number"
+          min="0"
+          class="form-control numericInput"
+          autocapitalize="characters"
+          id="chainTwoLimit1"
+          >
+          <input 
+          type="number"
+          min="0"
+          class="form-control numericInput"
+          autocapitalize="characters"
+          id="chainTwoLimit2"
           >
           <button type="submit" class="btn btn-info" id="sendButton">Enviar</button>
         </div>

@@ -1,2 +1,6 @@
 .result-box {
 }
+
+.numericInput {
+  max-width: 5em;
+}
