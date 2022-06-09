@@ -11,7 +11,7 @@ let $chainTwoLimit2 = document.getElementById("chainTwoLimit2");
 let $resultText = document.getElementById("resultText");
 let $messageLabel = document.getElementById("messageLabel");
 var $snackbar = document.getElementById("snackbar");
-let regularExpression = /^[GCTA]{30,60}$/i;
+let regularExpression = /^[GCTA]{40,60}$/i;
 let completeChain = "";
 let isLocalAlignment = false;
 let sameSize = false;
@@ -152,7 +152,11 @@ const Validations = (sequenceOne, sequenceTwo) => {
             "warning", 
             6000
             )
-            PrintMessage("Para realizar un alineamiento local las posiciones de inicio deben ser menores a las posiciones finales para ambas cadenas", true);
+            PrintMessage(
+                "Para realizar un alineamiento local las posiciones de inicio deben ser menores a las posiciones finales para ambas cadenas." + 
+                "\nAdicionalmente, todos los campos deben estar correctamente diligenciados.", 
+                true
+              );
         } else {
           PrintWithSnackBar(
             "Advertencia para realizar un alineamiento local", 
@@ -208,7 +212,7 @@ $sendButton.onclick = function () {
       PrintWithSnackBar(
         "Error en las cadenas ingresadas", 
         "GCTA son los unicos caracteres validos para una secuencia" + 
-        "<br>Ademas, estas debem temer una longitud entre 30 y 40 caracteres",
+        "<br>Ademas, estas debem temer una longitud entre 40 y 60 caracteres",
         "danger", 
         6000
         )
