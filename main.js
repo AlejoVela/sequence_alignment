@@ -1,6 +1,8 @@
 let $sendButton = document.getElementById("sendButton");
 let $chainOne = document.getElementById("chainOne");
 let $chainTwo = document.getElementById("chainTwo");
+let $textOne = document.getElementById("textOne");
+let $textTwo = document.getElementById("textTwo");
 let $resultChainOne = document.getElementById("resultChainOne");
 let $resultChainTwo = document.getElementById("resultChainTwo");
 let $resultCoincidence = document.getElementById("resultCoincidence");
@@ -11,11 +13,24 @@ let $chainTwoLimit2 = document.getElementById("chainTwoLimit2");
 let $resultText = document.getElementById("resultText");
 let $messageLabel = document.getElementById("messageLabel");
 var $snackbar = document.getElementById("snackbar");
-let regularExpression = /^[GCTA]{40,60}$/i;
+let regularExpression = /^[GCTAN]{1,60}$/i;
 let completeChain = "";
 let isLocalAlignment = false;
 let sameSize = false;
 let points = 0;
+let contentTextFile = "";
+let organism1 = "";
+let organism2 = "";
+
+
+const readFile = async (file) => {
+  let result = await new Promise((resolve) => {
+    let fileReader = new FileReader();
+    fileReader.onload = (e) => resolve(fileReader.result);
+    fileReader.readAsText(file);
+  });
+  return result;
+}
 
 const GlobalAlignment = (sequenceOne, sequenceTwo, alignment) => {
   let localSizeChainOne = sequenceOne.length;
@@ -49,6 +64,9 @@ const GlobalAlignment = (sequenceOne, sequenceTwo, alignment) => {
   isLocalAlignment == true
     ? (resultText += `\nLogintud local cadena 1: ${localSizeChainOne}\nLogintud local cadena 2: ${localSizeChainTwo}`)
     : (resultText += "");
+  if(organism1 != "" && organism2 != "")
+    resultText += `\nOrganismo cadena 1: ${organism1}\nOrganismo cadena 2: ${organism2}`
+
     isLocalAlignment == true
     ? PrintWithSnackBar(
         "Exito!", 
@@ -154,7 +172,7 @@ const Validations = (sequenceOne, sequenceTwo) => {
             )
             PrintMessage(
                 "Para realizar un alineamiento local las posiciones de inicio deben ser menores a las posiciones finales para ambas cadenas." + 
-                "\nAdicionalmente, todos los campos deben estar correctamente diligenciados.", 
+                "\nAdicionalmente, todos los campos deben estar correctamente diligenciados.\nMientras las posiciones sean incorrectas, el alineamiento se hará de forma global de manera predeterminada", 
                 true
               );
         } else {
@@ -212,7 +230,7 @@ $sendButton.onclick = function () {
       PrintWithSnackBar(
         "Error en las cadenas ingresadas", 
         "GCTA son los unicos caracteres validos para una secuencia" + 
-        "<br>Ademas, estas debem temer una longitud entre 40 y 60 caracteres",
+        "<br>Ademas, estas deben tener una longitud de máximo 60 nucleotidos",
         "danger", 
         6000
         )
@@ -227,3 +245,28 @@ $sendButton.onclick = function () {
       )
   }
 };
+
+const BlockFields = () => {
+  $chainOne.setAttribute("disabled", "true");
+  $chainTwo.setAttribute("disabled", "true");
+}
+
+$textOne.oninput = async function () {
+  contentTextFile = await readFile($textOne.files[0]);
+  let selectTextChain = contentTextFile.split("\n");
+  $chainOne.value = selectTextChain[1].substring(0, 60);
+  organism1 = selectTextChain[0].split("|")[4];
+
+  BlockFields();
+  console.log(selectTextChain);
+}
+
+$textTwo.oninput = async function () {
+  contentTextFile = await readFile($textTwo.files[0]);
+  let selectTextChain = contentTextFile.split("\n");
+  $chainTwo.value = selectTextChain[1].substring(0, 60);
+  organism2 = selectTextChain[0].split("|")[4];
+
+  BlockFields();
+  console.log(contentTextFile);
+}

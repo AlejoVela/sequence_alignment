@@ -70,7 +70,33 @@
           <button type="submit" class="btn btn-info" id="sendButton">Enviar</button>
         </div>
       </div>
+      <div class="row m-0 p-0">
+        <div class="col-6 mb-2">
+          <input 
+          type="file"
+          class="form-control"
+          autocapitalize="characters" 
+          placeholder="Type Chain #1"
+          pattern="/^[GCTA]+$/g"
+          id="textOne"
+          accept=".fasta"
+          >
+        </div>
+        <div class="col-6">
+          <input 
+          type="file"
+          class="form-control"
+          autocapitalize="characters" 
+          placeholder="Type Chain #1"
+          pattern="/^[GCTA]+$/g"
+          id="textTwo"
+          accept=".fasta"
+          >
+        </div>
+      </div>
     </div>
+
+
     <div class="row p-3">
       <div class="overflow-auto result-box bg-light text-black p-2">
 
@@ -84,6 +110,7 @@
         <p id="resultText"></p>
       </div>      
     </div>
+
     <div class="row bg-light position-relative mt-2">
       <footer class="fixed-bottom text-center p-1">
         Made by Diego Alejandro Restrepo Vela 2022
